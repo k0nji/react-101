@@ -1,0 +1,12 @@
+h1 {
+  color: white;
+  margin: 0;
+  padding: 12px;
+  background: black;
+  border: 2px solid black;
+  border-radius: 15px;
+  width: fit-content;
+  text-decoration: line-through;
+  text-decoration-color: red;
+  font-style: italic;
+}
