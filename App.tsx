@@ -18,11 +18,12 @@ class App2 extends React.Component {
   }
 }
 
-const Header1 = (props) => (
+// memo
+const Header1 = React.memo((props) => (
   <div style={{ color: props.color || 'red', fondSize: '16px' }}>
     {props.title}
   </div>
-);
+));
 
 export default function App() {
   const [name] = React.useState<string>('HELLO WORLD');
