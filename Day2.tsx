@@ -196,6 +196,94 @@ const ContextExample = () => {
     </div>
   );
 };
+
+// CustomerHook
+const useCounter = () => {
+  const [count, setCount] = React.useState(0);
+
+  const increase = (): void => {
+    setCount((c) => c + 1);
+  };
+
+  const decrease = (): void => {
+    setCount((c) => c - 1);
+  };
+
+  const setValue = (num: number) => {
+    setCount(num);
+  };
+  return [count, increase, decrease, setValue];
+};
+
+const useRevese = () => {
+  const revese = (str: string) => {
+    return str.split('').reverse().join('');
+  };
+
+  return [revese];
+};
+
+const useQueryParam = () => {
+  // q=scope&sxsrf=A
+  const getAllParam = (str: string): { name: string; value: string }[] => {
+    return str.split('&').map((e) => {
+      const [name, value] = e.split('=');
+      return { name, value };
+    });
+  };
+  return [getAllParam];
+};
+
+const CustomerHook = () => {
+  const [count, increase, decrease, setValue] = useCounter();
+  const [revese] = useRevese();
+  const [str, setStr] = React.useState<string>('');
+  const [strQ, setStrQ] = React.useState<string>('');
+  const [getAllParam] = useQueryParam();
+  return (
+    <div>
+      <h3>Customer Hook</h3>
+      <ul>
+        <li>prefix with 'use'</li>
+      </ul>
+      <h3>example</h3>
+      <div>
+        <span>useCounter</span>
+        <button onClick={() => increase()}>increase</button>
+        <button onClick={() => decrease()}>decrease</button>
+        <button onClick={() => setValue(Math.random())}>setValue</button>
+        <div>count: {count}</div>
+      </div>
+      <h3>My Hook</h3>
+      <div>
+        <input
+          type="text"
+          value={str}
+          onChange={(e) => setStr(e.target.value)}
+        />
+        <div>original:</div>
+        <div>reverse: {revese(str)}</div>
+        <hr />
+        <label htmlFor="">My query string</label>
+        <input
+          type="text"
+          value={strQ}
+          onChange={(e) => setStrQ(e.target.value)}
+        />
+        <div>result</div>
+        {getAllParam(strQ).map(({ name, value }) => {
+          return (
+            <div>
+              name: {name} <br /> value: {value}
+              <hr />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 const Day2 = () => {
   const count = React.useRef(0);
   React.useEffect(() => {
@@ -214,13 +302,17 @@ const Day2 = () => {
       <h1> React 101 Day 2</h1>
       <hr />
       {/* <Ref /> */}
-      {powFun()}
+      {/* <hr /> */}
+      {/* <ContextExample /> */}
+      {/* <hr /> */}
+      {/* {powFun()}
       <input
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-      />
-      <ContextExample />
+      /> */}
+      {/* <hr /> */}
+      <CustomerHook />
     </div>
   );
 };
