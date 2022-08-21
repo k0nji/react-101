@@ -324,12 +324,12 @@ const Parent = (prop) => {
 const Children = () => {
   return (
     <div>
-      <h3>Children</h3>
+      <h3>Children...</h3>
       <Parent title="this is 1">
         {(props) => {
           return (
             <React.Fragment>
-              {props.length || <p>result not found</p>}
+              {!props.length && <p>result not found</p>}
               <ul>
                 {props.map((e, i) => {
                   return <li key={i}>{e}</li>;
