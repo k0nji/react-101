@@ -284,6 +284,74 @@ const CustomerHook = () => {
   );
 };
 
+const Parent = (prop) => {
+  const [value, setValue] = React.useState<string>('');
+  const [list] = React.useState<string[]>([
+    'word',
+    'dog',
+    'cat',
+    'fish',
+    'react',
+  ]);
+  const [result, setResult] = React.useState<string[]>([]);
+  React.useEffect(() => {
+    if (!value) {
+      setResult([]);
+      return;
+    }
+    const _result = list.filter((e) => e.includes(value));
+    setResult(_result);
+  }, [value]);
+
+  return (
+    <div style={{ border: '1px solid red', padding: '18px' }}>
+      <h4>In parent</h4>
+      <div>Title {prop.title}</div>
+      <label htmlFor="keyword">🪅</label>
+      <input
+        name="keyword"
+        type="text"
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
+      />
+      {prop.children(result)}
+    </div>
+  );
+};
+
+const Children = () => {
+  return (
+    <div>
+      <h3>Children</h3>
+      <Parent title="this is 1">
+        {(props) => {
+          return (
+            <React.Fragment>
+              {props.length || <p>result not found</p>}
+              <ul>
+                {props.map((e, i) => {
+                  return <li key={i}>{e}</li>;
+                })}
+              </ul>
+            </React.Fragment>
+          );
+        }}
+      </Parent>
+      <br />
+    </div>
+  );
+};
+
+const MyBook = () => {
+  return (
+    <div>
+      <h3>my book</h3>
+    </div>
+  );
+};
+
 const Day2 = () => {
   const count = React.useRef(0);
   React.useEffect(() => {
@@ -312,7 +380,9 @@ const Day2 = () => {
         onChange={(e) => setValue(e.target.value)}
       /> */}
       {/* <hr /> */}
-      <CustomerHook />
+      {/* <CustomerHook /> */}
+      {/* <hr /> */}
+      <Children />
     </div>
   );
 };
