@@ -344,10 +344,14 @@ const Children = () => {
   );
 };
 
-const MyBook = () => {
+const Testing = () => {
   return (
     <div>
-      <h3>my book</h3>
+      <h3>Testing</h3>
+      <ul>
+        <li>jest</li>
+        <li>react testing libery</li>
+      </ul>
     </div>
   );
 };
@@ -382,7 +386,9 @@ const Day2 = () => {
       {/* <hr /> */}
       {/* <CustomerHook /> */}
       {/* <hr /> */}
-      <Children />
+      {/* <Children /> */}
+      {/* <hr /> */}
+      <Testing />
     </div>
   );
 };
